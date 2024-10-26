@@ -1,0 +1,183 @@
+font pango:Monocraft Nerd Font bold 10
+
+output * bg #9b9b7a solid_color
+
+output eDP-1 {
+  subpixel rgb
+  scale_filter linear
+}
+
+set $wallpaper $HOME/.local/share/wallpaper2.png 
+output "*" bg $wallpaper fill
+
+gaps inner 4
+gaps outer 4
+
+default_border pixel 2
+default_floating_border pixel 2
+
+# class border backgr. text indicator child_border
+client.focused #303536 #303536 #d4be98 #303536 #303536
+client.focused_inactive #303536 #303536 #d4be98 #303536 #303536
+client.unfocused #0a0b0b #303536 #d4be98 #0a0b0b #0a0b0b
+client.urgent #d8a657 #303536 #1d2021 #d8a657 #d8a657
+client.placeholder #7daea3 #303536 #1d2021 #7daea3 #7daea3
+
+# swayfx
+blur enable
+blur_xray enable
+blur_passes 3
+blur_radius 8
+shadows enable
+corner_radius 8
+layer_effects "waybar" shadows enable; corner_radius 8; blur enable
+
+bar {
+  swaybar_command waybar
+
+# status_command /usr/bin/i3status-rs $HOME/.config/i3status/config.toml
+# position top
+# gaps 8 8 0 8
+# height 29
+# font pango:Cascadia Mono NF medium 10
+# colors {
+# background #1d2021e5
+# focused_workspace #b7c37fe5 #a9b665e5 #0a0b0be5
+# inactive_workspace #1d2021e5 #0a0b0be5 #c7ab7ae5
+# }
+}
+
+# variables
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term alacritty
+set $menu tofi-drun | xargs swaymsg exec --
+set $browser firefox
+
+# common bindings
+bindsym $mod+Return exec $term
+bindsym $mod+d exec $menu
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m "Exit Sway?" -B "Yes, exit Sway" "swaymsg exit" --font="Cascadia Code NF medium 10"
+floating_modifier $mod normal
+
+# more bindings
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+v floating toggle
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+  bindsym $left resize shrink width 20px
+  bindsym $down resize grow height 20px
+  bindsym $up resize shrink height 20px
+  bindsym $right resize grow width 20px
+
+  bindsym Left resize shrink width 20px
+  bindsym Down resize grow height 20px
+  bindsym Up resize shrink height 20px
+  bindsym Right resize grow width 20px
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+input type:touchpad {
+  tap enabled
+  dwt enabled
+  accel_profile "flat"
+  natural_scroll disabled
+  # pointer_accel 0.5
+}
+
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+bindsym Print exec $HOME/.config/sway/screenshot.sh
+bindsym Shift+Print exec $HOME/.config/sway/screenshot.sh --clipboard
+exec_always {
+  gsettings set org.gnome.desktop.interface gtk-theme "Colloid-Dark-Compact-Gruvbox"
+  gsettings set org.gnome.desktop.interface icon-theme "elementary"
+  gsettings set org.gnome.desktop.interface font-size 10
+  gsettings set org.gnome.desktop.interface color-scheme \'prefer-dark\'
+}
+
+# swaylock configuration
+exec_always --no-startup-id swayidle -w \
+  timeout 300 'swaylock -f -i $HOME/.local/share/wallpaper.png' \
+  timeout 600 'swaymsg "output * dpms off"' \
+  resume 'swaymsg "output * dpms on"' \
+  before-sleep 'swaylock -f -i $HOME/.local/share/wallpaper.png'
+
+# Toggle workspaces
+bindsym $mod+grave workspace back_and_forth
+
+# Switch to prev/next workspace on current output
+bindsym $mod+n workspace next_on_output
+bindsym $mod+p workspace prev_on_output
+
+# Switch to prev/next workspace on all outputs
+bindsym $mod+Shift+n workspace next
+bindsym $mod+Shift+p workspace prev
+
+bindgesture {
+  swipe:3:right workspace prev
+  swipe:3:left workspace next
+  swipe:3:up exec $menu
+  swipe:4:down kill
+}
+
+exec --no-startup-id wl-paste --watch cliphist store
+bindsym $mod+Shift+x exec cliphist list | tofi | cliphist decode | wl-copy
+# includes
+include /etc/sway/config.d/*

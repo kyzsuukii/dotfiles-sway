@@ -1,0 +1,2 @@
+set BUN_INSTALL "$HOME/.bun"
+set PATH $BUN_INSTALL/bin $PATH

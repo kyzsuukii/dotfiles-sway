@@ -1,0 +1,14 @@
+font=Monocraft Nerd Font medium
+font-size=10
+background-color=#1d2021
+outline-width=0
+border-width=2
+border-color=#303536
+text-color=#d4be98
+prompt-text="⟩ "
+prompt-padding=4
+selection-color=#a9b665
+selection-match-color=#a9b665
+corner-radius=8
+width=500
+height=500
