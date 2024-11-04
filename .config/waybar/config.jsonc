@@ -6,12 +6,13 @@
   "margin-right": 8,
   "margin-bottom": 0,
   "margin-left": 8,
+  "mode": "dock",
 
   "modules-left": ["sway/workspaces", "sway/window"],
 
   "modules-center": ["clock"],
 
-  "modules-right": ["tray", "network", "battery", "pulseaudio"],
+  "modules-right": ["custom/music", "tray", "network", "battery", "pulseaudio"],
 
   "sway/workspaces": {
     "disable-scroll": true,
@@ -85,5 +86,17 @@
 
     "format-icons": [" ", " ", " ", " ", " "],
     "tooltip": false
+  },
+
+  "custom/music": {
+    "format": "{text}",
+    "escape": true,
+    "tooltip": false,
+    "exec": "~/.scripts/caway",
+    "return-type": "json",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl previous",
+    "on-scroll-down": "playerctl next",
+    "max-length": 35
   }
 }
