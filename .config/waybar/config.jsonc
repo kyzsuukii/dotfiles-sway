@@ -12,7 +12,14 @@
 
   "modules-center": ["clock"],
 
-  "modules-right": ["custom/music", "tray", "network", "battery", "pulseaudio"],
+  "modules-right": [
+    "custom/music",
+    "tray",
+    "network",
+    "battery",
+    "pulseaudio",
+    "custom/power"
+  ],
 
   "sway/workspaces": {
     "disable-scroll": true,
@@ -43,7 +50,7 @@
   "sway/window": {
     "format": "{title}",
     "tooltip": false,
-    "max-length": 50
+    "max-length": 40
   },
 
   "tray": {
@@ -98,5 +105,12 @@
     "on-scroll-up": "playerctl previous",
     "on-scroll-down": "playerctl next",
     "max-length": 35
+  },
+
+  "custom/power": {
+    "format": "{icon}",
+    "tooltip": false,
+    "format-icons": [""],
+    "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Shutdown'  'shutdown -h now' -b 'Restart' 'shutdown -r now' -b 'Logout' 'swaymsg exit' -b 'Hibernate' 'systemctl hibernate' --font='Cascadia Code NF medium 10'"
   }
 }

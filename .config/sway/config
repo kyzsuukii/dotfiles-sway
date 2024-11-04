@@ -180,5 +180,6 @@ bindgesture {
 
 exec --no-startup-id wl-paste --watch cliphist store
 bindsym $mod+Shift+x exec cliphist list | tofi | cliphist decode | wl-copy
+
 # includes
 include /etc/sway/config.d/*

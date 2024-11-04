@@ -15,12 +15,14 @@ window#waybar {
 }
 
 #custom-music,
+#cpu,
 #window,
 #battery,
 #network,
 #clock,
 #tray,
 #pulseaudio,
+#custom-power,
 #workspaces {
   margin: 4px;
   padding: 1px 4px;
@@ -84,4 +86,11 @@ window#waybar {
   color: #1d2021;
   background-color: #ea6962;
   border: 2px solid #303536;
+}
+
+#custom-power {
+  background-color: #ea6962;
+  color: #1d2021;
+  border: 2px solid #ea7f79;
+  padding-right: 8px;
 }
