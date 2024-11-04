@@ -7,25 +7,42 @@
   "margin-bottom": 0,
   "margin-left": 8,
 
-  "modules-left": [
-    "sway/workspaces"
-  ],
+  "modules-left": ["sway/workspaces", "sway/window"],
 
-  "modules-center": [
-    "clock"
-  ],
+  "modules-center": ["clock"],
 
-  "modules-right": [
-    "tray",
-    "network",
-    "battery",
-    "pulseaudio"
-  ],
+  "modules-right": ["tray", "network", "battery", "pulseaudio"],
 
   "sway/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
-    "tooltip": false
+    "tooltip": false,
+    "format": "{icon}",
+    "persistent-workspaces": {
+      "1": "[]",
+      "2": "[]",
+      "3": "[]",
+      "4": "[]",
+      "5": "[]"
+    },
+    "format-icons": {
+      "1": "一",
+      "2": "二",
+      "3": "三",
+      "4": "四",
+      "5": "五",
+      "6": "六",
+      "7": "七",
+      "8": "八",
+      "9": "九",
+      "10": "十"
+    }
+  },
+
+  "sway/window": {
+    "format": "{title}",
+    "tooltip": false,
+    "max-length": 50
   },
 
   "tray": {
@@ -39,9 +56,9 @@
   },
 
   "network": {
-    "format-wifi" : "󰤢 {bandwidthDownBits}",
+    "format-wifi": "󰤢 {bandwidthDownBits}",
     "format-ethernet": "󰤢 {bandwidthDownBits}",
-    "format-disconnected" : "󰤠 No Network",
+    "format-disconnected": "󰤠 No Network",
     "interval": 5,
     "tooltip": false
   },

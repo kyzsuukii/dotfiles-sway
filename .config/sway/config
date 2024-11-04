@@ -7,7 +7,7 @@ output eDP-1 {
   scale_filter linear
 }
 
-set $wallpaper $HOME/.local/share/wallpaper2.png 
+set $wallpaper $HOME/.local/share/wallpaper2.png
 output "*" bg $wallpaper fill
 
 gaps inner 4
@@ -154,10 +154,11 @@ exec_always {
 
 # swaylock configuration
 exec_always --no-startup-id swayidle -w \
-  timeout 300 'swaylock -f -i $HOME/.local/share/wallpaper.png' \
+  timeout 300 'swayidle -w timeout 300 "swaylock -f -i $HOME/.local/share/wallpaper.png"' \
   timeout 600 'swaymsg "output * dpms off"' \
   resume 'swaymsg "output * dpms on"' \
-  before-sleep 'swaylock -f -i $HOME/.local/share/wallpaper.png'
+  before-sleep 'swaylock -f -i $HOME/.local/share/wallpaper.png' \
+  idlehint 300
 
 # Toggle workspaces
 bindsym $mod+grave workspace back_and_forth
