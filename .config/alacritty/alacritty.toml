@@ -30,7 +30,8 @@ family = "CaskaydiaCove Nerd Font"
 style = "medium"
 
 [terminal.shell]
-program = "/bin/fish"
+# program = "/usr/bin/fish"
+program = "/usr/bin/zsh"
 
 [window]
 opacity = 0.900000
@@ -40,3 +41,4 @@ x = 10
 y = 10
 
 [terminal]
+
