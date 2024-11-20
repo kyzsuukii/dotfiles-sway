@@ -42,6 +42,10 @@ window#waybar {
   color: #c7ab7a;
 }
 
+#window:hover {
+  color: #e78a4e;
+}
+
 #workspaces button.focused {
   color: #d4be98;
 }

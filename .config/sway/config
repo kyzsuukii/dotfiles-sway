@@ -10,8 +10,8 @@ output eDP-1 {
 set $wallpaper $HOME/.local/share/wallpaper2.png
 output "*" bg $wallpaper fill
 
-gaps inner 4
-gaps outer 4
+gaps inner 2
+gaps outer 2
 
 default_border pixel 2
 default_floating_border pixel 2
@@ -29,8 +29,8 @@ blur_xray enable
 blur_passes 3
 blur_radius 8
 shadows enable
-corner_radius 8
-layer_effects "waybar" shadows enable; corner_radius 8; blur enable
+corner_radius 4
+layer_effects "waybar" shadows enable; corner_radius 4; blur enable
 
 bar {
   swaybar_command waybar
@@ -180,6 +180,8 @@ bindgesture {
 
 exec --no-startup-id wl-paste --watch cliphist store
 bindsym $mod+Shift+x exec cliphist list | tofi | cliphist decode | wl-copy
+
+for_window [app_id="Waydroid"] fullscreen enable
 
 # includes
 include /etc/sway/config.d/*

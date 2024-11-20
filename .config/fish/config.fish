@@ -12,3 +12,5 @@ zoxide init fish | source
 set PATH $HOME/.local/bin $HOME/go/bin $PATH
 
 set QT_QPA_PLATFORMTHEME qt5ct
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH

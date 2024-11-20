@@ -79,7 +79,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf z sudo zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search zsh-autopair)
+plugins=(git fzf z sudo zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search zsh-autopair web-search copyfile)
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
@@ -98,6 +98,7 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='nvim'
 # fi
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -124,6 +125,8 @@ path_dirs=(
     "$HOME/go/bin"
     "$HOME/.cargo/bin"
     "$HOME/.spicetify"
+    "$HOME/.config/emacs/bin"
+    "$HOME/binaryninja"
 )
 
 for dir in "${path_dirs[@]}"; do
@@ -142,21 +145,26 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # deno
 [[ -f "$HOME/.deno/env" ]] && source "$HOME/.deno/env"
 
-# fnm
-eval "$(fnm env --use-on-cd --shell zsh)"
-eval "$(fnm completions --shell zsh)"
-
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-
-if [[ ! $PATH == *$PNPM_HOME* ]]; then
-    export PATH="$PNPM_HOME:$PATH"
-fi
-# pnpm end
-
 # rust
 [[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
+# encore
+export ENCORE_INSTALL="/home/dwikyrza/.encore"
+export PATH="$ENCORE_INSTALL/bin:$PATH"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# bun completions
+[ -s "/home/dwikyrza/.bun/_bun" ] && source "/home/dwikyrza/.bun/_bun"
+
+# Android SDK
+export ANDROID_HOME="$HOME/Android/Sdk"
+export PATH="$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$PATH"
+export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.0.12433566"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
