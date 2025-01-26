@@ -26,19 +26,17 @@ white = '#ebe1d0'
 size = 11
 
 [font.normal]
-family = "CaskaydiaCove Nerd Font"
-style = "medium"
+family = "Cascadia Mono"
 
 [terminal.shell]
-# program = "/usr/bin/fish"
 program = "/usr/bin/zsh"
 
 [window]
 opacity = 0.900000
 
 [window.padding]
-x = 10
-y = 10
+x = 5
+y = 5
 
 [terminal]
 

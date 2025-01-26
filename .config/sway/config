@@ -7,7 +7,7 @@ output eDP-1 {
   scale_filter linear
 }
 
-set $wallpaper $HOME/.local/share/wallpaper2.png
+set $wallpaper $HOME/.local/share/wallpaper.png
 output "*" bg $wallpaper fill
 
 gaps inner 2
@@ -26,25 +26,14 @@ client.placeholder #7daea3 #303536 #1d2021 #7daea3 #7daea3
 # swayfx
 blur enable
 blur_xray enable
-blur_passes 3
-blur_radius 8
+blur_passes 1
+blur_radius 1
 shadows enable
 corner_radius 4
 layer_effects "waybar" shadows enable; corner_radius 4; blur enable
 
 bar {
   swaybar_command waybar
-
-# status_command /usr/bin/i3status-rs $HOME/.config/i3status/config.toml
-# position top
-# gaps 8 8 0 8
-# height 29
-# font pango:Cascadia Mono NF medium 10
-# colors {
-# background #1d2021e5
-# focused_workspace #b7c37fe5 #a9b665e5 #0a0b0be5
-# inactive_workspace #1d2021e5 #0a0b0be5 #c7ab7ae5
-# }
 }
 
 # variables
@@ -53,7 +42,7 @@ set $left h
 set $down j
 set $up k
 set $right l
-set $term foot
+set $term alacritty
 set $menu tofi-drun | xargs swaymsg exec --
 set $browser firefox
 
@@ -177,6 +166,8 @@ bindgesture {
   swipe:3:up exec $menu
   swipe:4:down kill
 }
+
+# exec --no-startup-id wshowkeys -a bottom -m 10 -t 1 -F 'Noto Sans 20'
 
 exec --no-startup-id wl-paste --watch cliphist store
 bindsym $mod+Shift+x exec cliphist list | tofi | cliphist decode | wl-copy

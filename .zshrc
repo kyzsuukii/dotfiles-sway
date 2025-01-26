@@ -79,7 +79,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf z sudo zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search zsh-autopair web-search copyfile)
+plugins=(git fzf z sudo zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search zsh-autopair web-search copyfile zsh-hist)
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
@@ -125,8 +125,9 @@ path_dirs=(
     "$HOME/go/bin"
     "$HOME/.cargo/bin"
     "$HOME/.spicetify"
-    "$HOME/.config/emacs/bin"
     "$HOME/binaryninja"
+    "$HOME/.local/share/soar/bin"
+    "$HOME/.config/composer/vendor/bin"
 )
 
 for dir in "${path_dirs[@]}"; do
@@ -168,3 +169,37 @@ export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.0.12433566"
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+
+export PATH=$PATH:/home/dwikyrza/.spicetify
+
+. "$HOME/.limbo/env"
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+alias hx="helix"
+
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
+setopt HIST_REDUCE_BLANKS  
+
+delete-failed-history() {
+    case $? in
+    0|130|137)
+      ;;
+    *)
+      hist -s d -1
+      ;;
+  esac
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd delete-failed-history
